@@ -1,0 +1,60 @@
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="dj4e" content="a76650df1a9ed5ae6c11bce464aa2710">
+        <meta />
+        <meta />
+        <meta />
+        <meta />
+        <meta /> 
+        <meta />
+        <meta />
+        <meta />
+        <meta />
+        <meta />
+        <meta />
+        <meta />
+        <meta />
+
+        <title>Add Comments</title>
+
+        <!-- links  -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" integrity="sha512-kq3FES+RuuGoBW3a9R2ELYKRywUEQv0wvPTItv3DSGqjpbNtGWVdvT8qwdKkqvPzT93jp8tSF4+oN4IeTEIlQA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script defer src="https://code.jquery.com/jquery-3.7.0.slim.js" integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" crossorigin="anonymous"></script>
+        <!-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script> -->
+        <!-- <script defer src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easy-loading/1.3.0/jquery.loading.min.js" integrity="sha512-tKLMM/v1nsieFOgUyeMSC2jdB4UtbU7R88e+S0pVIz3f6sWdpOpirG2j5pulmH45l1vk47J84V4ifXAYv+wuMw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                
+        <link rel="shortcut icon" href="{% static 'images/faviconB.ico' %}" />
+        <link rel="stylesheet" href="{% static 'css/comments.css' %}" />
+
+</head>
+<body>
+        <main>
+                <h3 class="text-success text-center mt-5 p-3">Just fill in the form to share your opinion with everyone.</h3>
+                <div class="own_form bg-warning-subtle ">
+                        <form action="" method="post" class="vstack g-2 text-dark w-50 h-25 mx-auto p-3 border border-danger border-5 rounded-3" >
+                        {% csrf_token %}
+                        {{ comments|crispy }} 
+
+                        <br /> 
+                        <input type="submit" value="Submit">
+                        </form>
+                        <a class="btn btn-outline-dark" href="{% url 'imgapp:all' %}" role="button" />Home</a>
+                        <!-- <input type="submit" value="Back" onclick="window.location.href=`{ {% url 'imgapp:all' %} }` ;return false;"> -->
+                </div>
+        </main>
+</body>
+</html>

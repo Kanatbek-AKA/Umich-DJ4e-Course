@@ -1,0 +1,102 @@
+body {
+	background: rgba(100, 100, 100, 0.3);
+}
+
+/* Provided from the  Course */
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: none;
+  background-color: rgba(0,0,0,0.5); /*dim the background*/
+}
+
+/* additional  */
+.nav {
+  height: 100%;
+  min-height: 60px;
+  display: flex;
+}
+
+.formline {
+  margin-top: 20px;
+  float: right;
+}
+
+.lft_link { 
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.own_link {
+  margin-left: 10px;
+  padding: 10px;
+  text-decoration: none;
+  color: darkblue;
+}
+
+.own_link:focus,
+.own_link:hover {
+/*  cursor: pointer;*/
+  font-size: 15px;
+  color: blue;
+  border: thin hidden ghostwhite;
+  background-color: lightgray;
+  border-radius: 10px;
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+.own_link:visited {
+  color: darkgreen;
+}
+
+#pic {
+  width: 100%;
+  max-width: 30%; 
+  margin-top: 10px;
+  margin-right: 30px; 
+  height:100%; 
+  max-height: 10cm;
+  float: right; 
+}
+
+.icns {
+  position: absolute;
+  top: 150px;
+  right: 70px;
+}
+
+.logo {
+  position: absolute;
+  top: 17cm;
+  right: 30px;
+}
+
+.in_logo {
+  border: 2px solid whitesmoke;
+}
+
+.back{
+  position: absolute;
+  top: 17cm;
+  left: 30px;
+
+}
+
+.cont_comments {
+  margin: -10px 0 0 30px;
+  padding: 10px;
+  width: 40%;
+  max-ẁidth: 500px;
+  height: 250px;
+  border: 3px solid darkred;
+  border-radius: 20px;
+  background: black;
+/*  overflow: scroll;*/
+}
+

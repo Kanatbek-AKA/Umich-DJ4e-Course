@@ -1,0 +1,13 @@
+body {
+	color: black;
+	background-color: lightyellow;
+	display: block;
+	justify-content: center;
+	align-items: center;
+/*	text-align: center;*/
+}	
+
+.own_form {
+	margin-top: 10px;
+	padding: 10px;
+}

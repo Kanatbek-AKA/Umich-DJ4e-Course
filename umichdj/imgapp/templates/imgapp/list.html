@@ -1,0 +1,183 @@
+{% load static l10n %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="dj4e" content="a76650df1a9ed5ae6c11bce464aa2710">
+	<meta />
+	<meta />
+	<meta /> 
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+
+	<title>Welcome to Image</title>
+
+	<!-- links  -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" integrity="sha512-kq3FES+RuuGoBW3a9R2ELYKRywUEQv0wvPTItv3DSGqjpbNtGWVdvT8qwdKkqvPzT93jp8tSF4+oN4IeTEIlQA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css" /> -->
+
+	<!-- This part works to render favicon  -->
+	<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+
+	<!-- Scripts -->
+	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+	
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
+	<script defer src="{% static 'javascript/all.js' %}"></script>
+</head>
+<body>
+	
+	<main class="bg-info own">
+		
+		<nav class="nav bg-body-tertiary">
+		  <div class="container-fluid">
+		  	{% if user.is_authenticated %}
+		  	<div class="lft_link">
+			<span class="h6 text-success rounded">Welcome {{ user.username|upper }}</span>
+			<a href="{% url 'imgapp:blog' %}" class="own_link" rel="noopener nofollower" target="_self">Blog</a>
+			<a href="{% url 'imgapp:logout' %}" class="own_link" rel="noopener nofollower" target="_self">Logout</a>
+			</div>
+		  	<form class="d-flex w-25" role="search">
+			  	{% csrf_token %}
+			  	<a href="{% url 'imgapp:all' %}" class="mt-2"><i class="fa fa-undo"></i></a>&nbsp;&nbsp;
+	     		 <input class="form-control me-2" name="imsearch" type="search" placeholder="Search" aria-label="Search" {% if search %} value="{{ search }}" {% endif %}>
+			     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			  </form> 
+  	        {% else %}
+  	        <div class="lft_link">
+			  <a href="{% url 'imgapp:login' %}?next={{ next }}" class="own_link" rel="noopener nofollower" target="_self">Login</a>
+		  	  <a href="{% url 'imgapp:signup' %}?next={{ next }}" class="own_link" rel="noopener nofollower" target="_self">Sign Up</a>
+		      </div>
+		      <div class="fsearch">
+		      		<img src="{% static 'images/AKAstyled.png' %}" alt="styled" width="60" height="30" class="rounded" />
+		      </div>
+			</div>
+	       {% endif %}
+			</nav>
+
+
+		<header class="own_header">
+			<h1 class="text-dark own_txt">Dr. Chucks DJ4 course - Image, Comment & Blogs</h1>
+		</header>
+
+		<div class="logo">
+			<a href="https://www.coursera.org/learn/django-javascript-jquery-json/lecture/7uKxi/walkthrough-dj4e-forums-forums-sample-code" rel="noopener nofollower" target="_blank" class="text-decoration-none"><img src="{% static 'images/umich_logo.png' %}" alt='Umich Logo DJ course' id="umich_logo"  width="100" height="100" class="ml-5 in_logo"></a>
+		</div>
+
+
+		{% if user.is_authenticated %}
+		<p class="text-dark own_style">
+		{% if ad %}
+		<ul class="ccl">
+		  {% for pic in ad %}
+		    <li>
+		        <a href="{% url 'imgapp:pic_detail'  pic.id %}" class="text-decoration-none text-dark h5">{{ pic.title }}</a>
+		        {% if pic.owner == user %}
+		        &nbsp;&nbsp;&nbsp;&nbsp;
+		        <button class="btn btn-outline-primary btn-sm rounded"><a href="{% url 'imgapp:pic_update' pic.id %}" class="text-decoration-none">Edit</a></button> |
+		        <button class="btn btn-outline-primary btn-sm rounded"><a href="{% url 'imgapp:pic_delete' pic.id %}" class="text-decoration-none">Delete</a></button>
+		        {% endif %}
+
+		        <!-- Two hrefs with two stacked icons each - one showing and one hidden -->
+		        <a href="#" onclick="favPost('{% url 'imgapp:ad_unfavorite' pic.id %}', {{ pic.id }} );return false;" {% if pic.id not in favorites %} style="display: none;" {% endif %} id="favorite_star_{{pic.id}}">
+		        <span class="fa-stack" style="vertical-align: middle;">
+		        <i class="fa fa-star fa-stack-1x" style="color: orange;"></i>
+		        <i class="fa fa-star-o fa-stack-1x"></i></span></a>
+		        <!-- the second href -->
+		        <a href="#" onclick="favPost('{% url 'imgapp:ad_favorite' pic.id %}', {{ pic.id }} );return false;" {% if pic.id in favorites %} style="display: none;" {% endif %} id="unfavorite_star_{{pic.id}}">
+		        <span class="fa-stack" style="vertical-align: middle;">
+		        <i class="fa fa-star fa-stack-1x" style="display: none; color: orange;"></i>
+		        <i class="fa fa-star-o fa-stack-1x"></i>
+		        </span>
+		        </a>
+		    </li>
+
+		    <!-- Favorites icon JQuery -->
+		    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
+	    	<script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+			
+			<script type="text/javascript">
+			    function favPost(url, thing_id) {   // 
+			        // console.log('Requesting JSON');
+			        $.post(url, {},  function(rowz) {
+			            // console.log(url, 'finished');
+			            $("#unfavorite_star_" + thing_id).toggle();  // hide()
+			            $("#favorite_star_" + thing_id).toggle();    // show()
+			        }).fail(function(xhr) {
+			            alert('Url failed with ' + xhr.status +' '+url);
+			        });
+			    } 
+
+			    $(document).ready( function() {
+					// window.CSRF_TOKEN = "{{ csrf_token }}";                             // this way does not work
+				    // $.ajaxSetup({cache: false});                                        // this way does not work
+
+				    $.ajaxSetup({ data: {csrfmiddlewaretoken: '{{ csrf_token }}' }});      // this made magic 
+			    })
+
+			    // source https://stackoverflow.com/questions/5100539/django-csrf-check-failing-with-an-ajax-post-request/7715325#7715325
+
+		    	// Let's check it with different django project 
+			    // $.ajaxSetup({ 
+				//      beforeSend: function(xhr, settings) {
+				//          function getCookie(name) {
+				//              var cookieValue = null;
+				//              if (document.cookie && document.cookie != '') {
+				//                  var cookies = document.cookie.split(';');
+				//                  for (var i = 0; i < cookies.length; i++) {
+				//                      var cookie = jQuery.trim(cookies[i]);
+				//                      // Does this cookie string begin with the name we want?
+				//                      if (cookie.substring(0, name.length + 1) == (name + '=')) {
+				//                          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+				//                          break;
+				//                      }
+				//                  }
+				//              }
+				//              return cookieValue;
+				//          }
+				//          if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+				//              // Only send the token to relative URLs i.e. locally.
+				//              xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+				//          }
+				//      } 
+				// });
+
+			</script>
+		  {% endfor %}
+		</ul>
+		{% else %}
+		 	{% if search %}
+		 		<p class="info_img">Could not find looking name, Please re-check.</p>
+		 	{% else %}
+		 		 <p class="info_img">There are no images in the database. Be first to add an image.</p>
+		 	{% endif %}
+		{% endif %}	
+		{% else %}
+		 <p class="info_img">To view images and blogs, please sign in.</p>
+		</p>
+		{% endif %}
+
+		<div class="own_style">
+		<button class="btn btn-outline-success"><a href="{% url 'imgapp:pic_create' %}" class="text-decoration-none">Add a Pic</a></button>   
+		<!-- <i style="margin-top: 150px; text-align: center; font-size:20px; color:black;">{{ success }}</i> -->
+		</div>
+
+	</main>
+
+
+</body>
+</html>

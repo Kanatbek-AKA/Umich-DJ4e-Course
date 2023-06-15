@@ -1,0 +1,46 @@
+{% load static l10n %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial_scale=1.0" />
+  <meta name="dj4e" content="a76650df1a9ed5ae6c11bce464aa2710">
+  <meta />
+  <meta />
+  <meta />
+  <meta />
+  <meta /> 
+  <meta />
+  <meta />
+  <meta />
+  <meta />
+  <meta />
+  <meta />
+  <meta />
+  <meta />
+
+  <title>ImgApp Umich</title>
+
+  <!-- links  -->
+  <link />
+  <link />
+  <link />
+  <link />
+  <link />
+  <link />
+
+</head>
+<body>
+  
+    <h1>Delete Comment</h1>
+    <p>Are you sure you want to delete the comment: {{ comment }}?</p>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="Yes, delete.">
+    </form>
+
+
+</body>
+</html>

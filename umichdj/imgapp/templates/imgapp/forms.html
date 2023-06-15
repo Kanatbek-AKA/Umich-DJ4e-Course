@@ -1,0 +1,109 @@
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="dj4e" content="a76650df1a9ed5ae6c11bce464aa2710">
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+	<meta /> 
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+	<title> Load Image</title>
+
+	<!-- links  -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" integrity="sha512-kq3FES+RuuGoBW3a9R2ELYKRywUEQv0wvPTItv3DSGqjpbNtGWVdvT8qwdKkqvPzT93jp8tSF4+oN4IeTEIlQA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css" />
+	<link />
+	<link />
+	<link rel="shortcut icon" href="{% static 'images/faviconB.ico' %}" />
+	<link rel="stylesheet" href="{% static 'css/forms.css' %}" />
+
+
+	<!-- Scripts -->
+	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<!-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script> -->
+	<script defer src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easy-loading/1.3.0/jquery.loading.min.js" integrity="sha512-tKLMM/v1nsieFOgUyeMSC2jdB4UtbU7R88e+S0pVIz3f6sWdpOpirG2j5pulmH45l1vk47J84V4ifXAYv+wuMw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+			
+		<nav class="nav bg-body-tertiary">
+		  <div class="container-fluid">
+  		{% if user.is_authenticated %}
+		  	<div class="lft_link">
+			<a href="{% url 'imgapp:all' %}" class="own_link" rel="noopener nofollower" target="_self">Home</a> 
+			<a href="{% url 'imgapp:logout' %}" class="own_link" rel="noopener nofollower" target="_self">Logout</a> 
+		</div>
+		{% endif %}
+			<div class="fsrch" >
+				<img src="{% static 'images/AKA_pandas.png' %}" alt="pandas" width="70" height="30" />
+			</div>
+		<!--<form class="d-flex w-25 fsrch" role="search">
+			  	{% csrf_token %}
+	     		 <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+			  	}
+			    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			  </form> -->
+			</div> 
+		</nav>
+
+		<div class="mt-5 ml-5 px-auto">
+		{% if user.is_authenticated %}
+			<span class="h5 text-dark"><i class="h4 text-primary bg-secondary rounded-3">{{ user.username|upper }}</i>&nbsp;&#8209;&nbsp; Upload your image</span>
+		{% endif %}
+		<div class="fimg">
+		  <form action="" method="post" id="upload_form" enctype="multipart/form-data" class="w-50 h-25">
+		    {% csrf_token %}
+		    {{ form|crispy }}
+		    <br />	
+		    <input type="submit" class="btn btn-dark rounded" value="Submit">&nbsp;&nbsp;
+		    <!-- <input type="submit" class="btn btn-dark rounded" value="Back" onclick="window.location.href='{% url 'imgapp:all' %}';return false;"> -->
+		  </form>		
+		 </div>
+		</div>
+	    </div>
+		<!-- https://stackoverflow.com/questions/2472422/django-file-upload-size-limit -->
+		
+		<script>
+			window.onload = function() {
+				"use strict";
+				
+				$("#upload_form").submit( function() {
+					  // console.log('Checking file size');
+			  
+					  if (window.File && window.FileReader && window.FileList && window.Blob) {
+
+					      var file = $('#id_{{ form.upload_field_name }}')[0].files[0];
+					    
+					      if (file && file.size > {{ form.max_upload_limit }} ) {
+					          alert("File " + file.name + " of type " + file.type + " must be < {{ form.max_upload_limit_text }}");
+					 
+					      return false;
+					    }
+					  }
+					});
+			}
+	
+		</script>
+
+
+
+</body>
+</html>

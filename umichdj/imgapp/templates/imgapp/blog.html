@@ -1,0 +1,136 @@
+{% load static l10n %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="dj4e" content="a76650df1a9ed5ae6c11bce464aa2710">
+	<meta />
+	<meta />
+	<meta /> 
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+	<meta />
+
+	<title>Add Blog</title>
+
+	<!-- links  -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" integrity="sha512-kq3FES+RuuGoBW3a9R2ELYKRywUEQv0wvPTItv3DSGqjpbNtGWVdvT8qwdKkqvPzT93jp8tSF4+oN4IeTEIlQA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css" /> -->
+
+	<link rel="shortcut icon" href="{% static 'images/faviconC.ico' %}" />
+
+	<!-- Scripts -->
+	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+	
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
+	<!-- <script defer src="{% static 'javascript/blog.js' %}"></script> -->
+</head>
+<body>
+
+	<main>
+
+	<nav class="nav bg-body-tertiary">
+		  <div class="container-fluid">
+  		{% if user.is_authenticated %}
+		  	<div class="lft_link">
+			<a href="{% url 'imgapp:all' %}" class="own_link" rel="noopener nofollower" target="_self">Home</a> 
+			<a href="{% url 'imgapp:logout' %}" class="own_link" rel="noopener nofollower" target="_self">Logout</a> 
+		</div>
+		{% endif %}
+			  <form class="fsrch d-flex w-25 mr-1" role="search">
+			  	{% csrf_token %}
+			  	<a href="{% url 'imgapp:blog' %}" class="mt-2"><i class="fa fa-undo"></i></a>&nbsp;&nbsp;
+	     		 <input class="form-control me-2" name="bsearch" type="search" placeholder="Search..." aria-label="Search" {% if search %} value="{{ search }}" {% endif %}>
+			    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			  </form>
+			</div>
+		</nav>
+
+
+		<h1 class="mt-5 h1 p-5 text-info ">Blog page</h1>
+
+		<!-- https://www.w3schools.com/howto/howto_css_search_button.asp -->
+		<!-- <div style="position:absolute; top:100px; right:50px; z-index:10;">
+		<form>
+			{% csrf_token %}
+		    <input type="text" placeholder="Search.." name="bsearch" {% if search %} value="{{ search }}" {% endif %}>
+		    <button type="submit"><i class="fa fa-search"></i></button>
+		    <a href="{% url 'imgapp:blog' %}"><i class="fa fa-undo"></i></a>
+		</form>		
+		</div> -->
+
+
+		<p>
+		<div class="cont_own">
+			<div class="box_own">
+			{% if blog %}
+			<ul>
+			  {% for post in blog %}
+			    <li>
+			        <a href="{% url 'imgapp:blog_detail'  post.id %}">{{ post.title }}</a>
+			        {% if post.owner_id == user.id %}
+			        (<a href="{% url 'imgapp:blog_update' post.id %}" class="text-decoration-none">Edit</a> |
+			        <a href="{% url 'imgapp:blog_delete' post.id %}" class="text-decoration-none">Delete</a>)
+			        <br/>
+			        {% endif %}
+			        <div style="left:10px">
+			            {% if post.text|length < 100 %}
+			                {{ post.text }}
+			            {% else %}
+			                {{ post.text|slice:"0:99" }}
+			                <a href="{% url 'imgapp:blog_detail'  post.id %}" class="text-decoration-none">...</a>
+			            {% endif %}
+			        </div>
+			        
+			        <small>
+			        {% if post.owner.username %}
+			            posted by {{ post.owner.username }}
+			        {% endif %}
+			        {{ post.natural_updated }}
+			        </small>
+			    </li>
+			  {% endfor %}
+			</ul>
+			{% else %}
+				{% if search %}
+					<o>There is no tag matching your search</o>
+				{% else %}
+  				    <p>There are no posts in the database.</p>
+				{% endif %}	
+			{% endif %}
+			</div>
+
+		  </div>
+		</p>
+		<p class="ml-5 p-5">
+		<a href="{% url 'imgapp:blog_create' %}" class="text-dark btn btn-outline-light text-decoration-none">Add a Post</a> 
+		<!-- |
+		{% if user.is_authenticated %}
+		<a href="{% url 'imgapp:logout' %}?next={% url 'imgapp:all' %}" class="text-dark btn btn-outline-light text-decoration-none">Logout</a>
+		{% else %}
+		<a href="{% url 'imgapp:login' %}?next={% url 'imgapp:all' %}" class="text-dark btn btn-outline-light text-decoration-none">Login</a>
+		{% endif %} -->
+		</p>
+
+		<div class="play_logo">
+	      <div class="logo">
+	        <a href="https://www.coursera.org/learn/django-javascript-jquery-json/lecture/7uKxi/walkthrough-dj4e-forums-forums-sample-code" rel="noopener nofollower" target="_blank" class="text-decoration-none"><img src="{% static 'images/umich_logo.png' %}" alt='Umich Logo DJ course' id="umich_logo"  width="100" height="100" class="in_logo"></a>
+    		</div>
+  		</div>
+	</main>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+body {
+	background: lightseagreen;
+/*	color: ;*/
+}
+
+.nav {
+	height: 100%;
+	min-height: 60px;
+	display: flex;
+/*	flex-direction: raw;*/
+}
+
+.fsrch {
+	margin-top: 20px;
+	float: right;
+}
+
+.lft_link {	
+	position: absolute;
+	top: 30px;
+	left: 30px;
+}
+
+.own_link {
+	margin-left: 10px;
+	padding: 10px;
+	text-decoration: none;
+}
+
+.own_link:focus,
+.own_link:hover {
+/*	cursor: pointer;*/
+	color: darkblue;
+	border: thin hidden ghostwhite;
+	background-color: lightgray;
+	border-radius: 10px;
+	opacity: 0.7;
+	text-decoration: none;
+}
+
+.own_link:visited {
+	color: darkgreen;
+}
+
+
+.cont_own {
+	margin: -50px 0 -20px 50px;
+	padding: 5px;
+	border: thin solid lightskyblue;
+	border-top-width: 5px;
+	border-top-color: lightslategray;
+	border-radius: 20px;
+	width: 100%;
+	max-width: 50rem;
+	height: 300px;
+	overflow: scroll;
+}
+
+
+ul {
+	list-style-type: octal;
+}
+
+
+ul li a:first-of-type {
+	color: whitesmoke;
+	text-decoration: none;
+
+}
+
+ul li a:first-of-type:hover {
+	color: black;
+	cursor: pointer;
+	text-decoration: none;
+	background-color: ghostwhite;
+	font-weight: bold;
+	border-radius: 10px;
+	opacity: 0.7;
+}
+
+
+ul li {
+	color: black;
+	margin-left: 50px;
+	margin-bottom: 2px;
+	padding: 10px;
+}
+
+.play_logo {
+  position: absolute;
+  top: 17cm;
+  right: 30px;
+}
+
+.logo {
+  border: 2px solid whitesmoke;
+}

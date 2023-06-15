@@ -1,0 +1,146 @@
+body {
+  background: cadetblue;
+  color: ghostwhite;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt {
+  position: absolute;
+  top: 20cm;
+  right: 50px;
+  font-size: 20px;
+  color: darkorange;
+}
+
+.nav {
+  height: 100%;
+  min-height: 60px;
+  display: flex;
+/*  flex-direction: raw;*/
+}
+
+.formline {
+  margin-top: 20px;
+  float: right;
+}
+
+.lft_link { 
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.own_link {
+  margin-left: 10px;
+  padding: 10px;
+  text-decoration: none;
+  color: darkblue;
+}
+
+.own_link:focus,
+.own_link:hover {
+/*  cursor: pointer;*/
+  font-size: 15px;
+  color: blue;
+  border: thin hidden ghostwhite;
+  background-color: lightgray;
+  border-radius: 10px;
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+.own_link:visited {
+  color: darkgreen;
+}
+
+.logcenter {
+  margin: 20px 0 0 50px;
+  padding: 15px;
+/*  text-align: center;*/
+}
+
+.logcont {
+  width: 100%;
+  max-width: 50%;
+  height: 100%;
+  min-height: 50%;
+
+}
+ 
+.social_auth {
+  font-display: unset;
+}
+
+.socialapps {
+  list-style-type: none;
+  color: black;
+}
+
+.socialapps ul {
+    margin-top: -20px;
+}
+
+.social_head {
+  margin-top: 10px;
+  margin-left: 20px;
+  padding: 5px;
+  font-size: 12px;
+  color: ghostwhite;
+  text-shadow: 2px 2px 2px black, 1px 1px 1px darkblue, 1px 0 0 white;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  font-family: "Arial", sans-serif;
+}
+
+.app_list {
+  list-style-type: none;
+}
+
+.app_list2 {
+  margin-left: -10rem;
+  list-style-type: none;
+}
+
+.app_list li,
+.app_list2 li {
+  margin-bottom: 10px;
+  margin-left: -10px;
+}
+
+.apps i  {
+  font-size: 12px;
+}
+
+.apps a {
+  font-size: 12px;
+}
+
+.play_logo {
+  position: absolute;
+  top: 17cm;
+  right: 30px;
+}
+
+.logo {
+  border: 2px solid whitesmoke;
+}
+
+/* Without navigation */
+/*form {
+  margin: 150px 0 0 50px;
+  padding: 15px;
+  border: 3px inset darkgray;
+  width: 400px;
+}
+
+input {
+  margin: 10px;
+  border-radius: 10px;
+ }
+
+ .info {
+    margin-top: 10px;
+    margin-left: 50px;
+    padding: 5px;
+ }  */
