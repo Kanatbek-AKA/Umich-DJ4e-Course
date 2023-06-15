@@ -264,7 +264,9 @@ class BlogCreateView(LoginRequiredMixin, View):
 
         art = blog.save(commit=False)
         art.owner = self.request.user
-        blog.save()
+        art.save()
+        # Actually the blog works without the m2m() just added as instructed by the task         
+        blog.save_m2m()
         return redirect(self.success_url)
 
 
