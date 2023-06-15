@@ -63,7 +63,7 @@ class BlogForm(forms.ModelForm):
         instance = super(BlogForm, self).save(commit=False)
         if commit:
             instance.save()
-
+        
         return instance
 
 
