@@ -35,7 +35,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 
-# TODO use this for requests POSTs to filter, escape any code injection
+# TODO 
 from django.utils.html import conditional_escape, escape, mark_safe
 
 # Clear cache TODO
